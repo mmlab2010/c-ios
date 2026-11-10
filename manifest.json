@@ -1,0 +1,95 @@
+{
+  "id": "./index.html",
+  "name": "스마트 계산기 & 실시간 환율 계산기",
+  "short_name": "스마트계산기",
+  "description": "시인성이 뛰어난 큰 버튼의 일반 계산기와 실시간 환율 연동 현금/송금 우대 계산을 제공하는 아이폰 전체화면 PWA 앱",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "orientation": "portrait",
+  "background_color": "#eef2f7",
+  "theme_color": "#0ea5e9",
+  "categories": [
+    "finance",
+    "utilities",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./icons/apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/apple-touch-icon-167x167.png",
+      "sizes": "167x167",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "일반 계산기",
+      "short_name": "계산기",
+      "description": "스마트 일반/공학 계산기 바로 열기",
+      "url": "./index.html?tab=calc",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "외화 환전 계산기",
+      "short_name": "환율계산기",
+      "description": "실시간 환율 및 우대율 계산기 바로 열기",
+      "url": "./index.html?tab=fx",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

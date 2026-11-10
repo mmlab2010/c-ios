@@ -1,0 +1,86 @@
+name: iPhone PWA Build & Deploy
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # GitHub 웹페이지에서 수동으로 빌드 버튼을 눌러 실행 가능
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-pwa:
+    name: Build iPhone Fullscreen PWA
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate PWA Manifest & iOS Icons
+        run: |
+          echo "Checking required PWA & iOS files..."
+          test -f index.html
+          test -f style.css
+          test -f app.js
+          test -f manifest.json
+          test -f sw.js
+          test -f app_icon.png
+          test -f apple-touch-icon.png
+          test -f icons/apple-touch-icon-180x180.png
+          test -f icons/icon-192.png
+          test -f icons/icon-512.png
+          python3 -m json.tool manifest.json > /dev/null
+          echo "All PWA & iPhone icon assets verified successfully!"
+
+      - name: Build iPhone PWA Distribution Package
+        run: |
+          mkdir -p dist-pwa
+          cp index.html style.css app.js manifest.json sw.js app_icon.png apple-touch-icon.png CalcExchange-iPhone-App.mobileconfig dist-pwa/
+          cp -r icons dist-pwa/icons
+
+      - name: Upload iPhone PWA WebApp Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CalcExchange-iPhone-PWA-WebApp
+          path: dist-pwa/
+          if-no-files-found: error
+
+      - name: Upload iPhone Fullscreen Profile (.mobileconfig) Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CalcExchange-iPhone-MobileConfig
+          path: CalcExchange-iPhone-App.mobileconfig
+          if-no-files-found: error
+
+      - name: Upload Pages Artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-pwa/
+
+  deploy-pages:
+    name: Deploy iPhone PWA to GitHub Pages
+    needs: build-pwa
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

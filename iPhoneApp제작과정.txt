@@ -1,0 +1,30 @@
+(1) PC에서 만든 웹 앱을 아이폰에서 PWA 방식으로 동작하는 웹 앱으로 만들 것. 조건은 아래와 같음.
+1) 사이트는 https://mmlab2010.github.io/calc/ 이고, 이 사이트를 보여주는 전체화면
+PWA 방식으로 작동하는 아이폰 앱으로 제작할 것. 
+2) 아이콘도 함께 제작하여 줄 것. 아이콘의 모양은 밝고 세련되며 해당 사이트의 내용에
+적절한 디자인으로 만들어 줄 것. 해당 사이트는 계산기와 환율계산기가 복합적으로 있음.
+3) 내 컴퓨터에 안드로이드 스튜디오가 없어서, Github Action으로 빌드까지 할 수 있게 세팅할 것.
+
+(2) 작업이 완료되면, github 사이트에 로그인하고, 새로운 저장소 만들기.
+
+(3) 위 (1)의 작업 폴더에 가서, powershell 을 실행하고 아래 명령을 실행
+
+echo "# c-ios" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/mmlab2010/c-ios.git
+git push -u origin main
+
+!!(4) gitHub 저장소의 Actions 탭으로 이동하면 자동으로 Android APK Build 워크플로우가 실행됩니다. 
+    (수동 실행 버튼인 Run workflow도 지원합니다.)
+
+(5) 빌드가 완료되면 해당 워크플로우 결과 화면 하단의 Artifacts에서 바로 설치 가능한 
+    APK(CalcExchange-Release-APK 또는 CalcExchange-Debug-APK)를 다운로드하여 스마트폰에 
+    설치할 수 있습니다.
+
+(6) Android 폰에 다운로드 받고 설치함. 이때 보안관련 경고 등이 나오면 신뢰할 수 있는 APP으로
+    과정을 허용할 것.
+
+(7) 바탕화면에 나타난 icon을 눌러서 실행 실험.
